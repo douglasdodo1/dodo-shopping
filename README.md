@@ -13,7 +13,7 @@ Dodo Shopping é uma aplicação web de e-commerce desenvolvida com **Next.js 15
 - [TypeScript](https://www.typescriptlang.org/)
 
 ## 📦 Estrutura de Pastas
-
+```
 src/
 ├── app/ # Rotas e páginas (Next.js App Router)
 │ └── cart/ # Página do carrinho de compras
@@ -25,6 +25,7 @@ src/
 ├── providers/ # Providers globais (React Query, Contexts)
 ├── services/ # Funções de fetch/serviços externos (ex: getAllProducts)
 ├── types/ # Tipagens TypeScript (ex: productType.ts)
+```
 
 ## 🧠 Funcionalidades
 
@@ -43,6 +44,8 @@ src/
 export const DotToComma = (value: number): string => {
   return value.toFixed(2).replace(/\./g, ",");
 };
+```
+
 💻 Como Rodar Localmente
 Clone o repositório
 
