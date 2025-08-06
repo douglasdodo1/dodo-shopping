@@ -4,12 +4,18 @@ import { productType } from "../types/product-type";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Label } from "./ui/label";
+import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
+import { ShoppingCartIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export const CartProduct = () => {
   const [products, setProducts] = useState<productType[]>([]);
   const [quantities, setQuantities] = useState<{ [id: string]: number }>({});
   const [total, setTotal] = useState<number>(0);
   const [imgLoading, setImgLoading] = useState<{ [id: string]: boolean }>({});
+  const [confirmation, setConfirmation] = useState<boolean>(false);
+  const router = useRouter();
 
   useEffect(() => {
     const stored = localStorage.getItem("cart");
@@ -53,11 +59,13 @@ export const CartProduct = () => {
   };
 
   const handleConfirm = () => {
-    alert(`Compra confirmada! Total: R$ ${total.toFixed(2)}`);
     localStorage.removeItem("cart");
     setProducts([]);
     setQuantities({});
     setTotal(0);
+    setConfirmation(true);
+    setTimeout(() => setConfirmation(false), 3000);
+    setTimeout(() => router.push("/"), 3000);
   };
 
   const handleDelete = (id: string) => {
@@ -92,14 +100,14 @@ export const CartProduct = () => {
                     onLoadingComplete={() => setImgLoading((prev) => ({ ...prev, [product.id]: false }))}
                   />
                 </div>
-                <div className="w-150">
-                  <h2 className="text-xl font-semibold text-wrap">{product.title}</h2>
+                <div className="lg:w-150">
+                  <Label className="text-[13px]  lg:text-xl text font-semibold text-wrap">{product.title}</Label>
                 </div>
               </div>
 
-              <div className="flex items-center justify-end w-2/5">
-                <div className="flex justify-end w-1/3">
-                  <p className="text-gray-600 mt-1">R$ {product.price.toFixed(2)} / unidade</p>
+              <div className="flex space-y-2 md:space-y-0 flex-col lg:flex-row items-center justify-end w-2/5">
+                <div className="flex justify-end w-full lg:w-1/3">
+                  <p className="text-[12px] lg:text-sm text-gray-600 mt-1">R$ {product.price.toFixed(2)} / unidade</p>
                 </div>
                 <div className="flex items-center justify-center gap-2 w-2/8">
                   <Button variant="outline" size="sm" onClick={() => decreaseQty(product.id)}>
@@ -110,7 +118,7 @@ export const CartProduct = () => {
                     +
                   </Button>
                 </div>
-                <div className="flex justify-end w-2/15">
+                <div className="flex justify-center lg:justify-end w-full lg:w-2/15">
                   <p className="text-gray-700 font-medium">
                     R$ {(product.price * (quantities[product.id] || 1)).toFixed(2)}
                   </p>
@@ -127,6 +135,16 @@ export const CartProduct = () => {
           <Button variant="default" className="w-full max-w-md mt-3" onClick={handleConfirm}>
             Confirmar Compra
           </Button>
+        </div>
+      )}
+
+      {confirmation && (
+        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 ">
+          <Alert variant="default" className="bg-green-300">
+            <ShoppingCartIcon className="h-15 w-4 " />
+            <AlertTitle>Compra realizada com sucesso!</AlertTitle>
+            <AlertDescription>Obrigado por comprar conosco! Seu pedido foi confirmado.</AlertDescription>
+          </Alert>
         </div>
       )}
     </div>

@@ -9,9 +9,10 @@ interface ProductDialogProps {
   product: productType;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  addToCart: () => React.Dispatch<React.SetStateAction<productType[]>> | void;
 }
 
-export function ProductDialog({ product, open, onOpenChange }: ProductDialogProps) {
+export function ProductDialog({ product, open, onOpenChange, addToCart }: ProductDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="w-full max-w-2xl max-h-200 overflow-auto">
@@ -32,8 +33,17 @@ export function ProductDialog({ product, open, onOpenChange }: ProductDialogProp
 
         <DialogFooter className="flex justify-center mt-2">
           <div className="flex items-center justify-center space-x-4">
-            <p className="text-lg font-semibold">Valor do produto: R$ {DotToComma(product.price)}</p>
-            <Button onClick={() => onOpenChange(false)}>Adicionar ao carrinho</Button>
+            <p className="text-lg text-wrap text-center font-semibold">
+              Valor do produto: R$ {DotToComma(product.price)}
+            </p>
+            <Button
+              onClick={() => {
+                onOpenChange(false);
+                addToCart();
+              }}
+            >
+              Adicionar ao carrinho
+            </Button>
           </div>
         </DialogFooter>
       </DialogContent>
