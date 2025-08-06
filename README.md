@@ -95,4 +95,3 @@ https://dodo-shopping.vercel.app/
 Douglas Gemir
 [CIN - UFPE • Ciência da Computação]
 GitHub: @douglasdodo1
-```
