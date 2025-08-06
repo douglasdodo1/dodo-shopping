@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛍️ Dodo Shopping
 
-## Getting Started
+Dodo Shopping é uma aplicação web de e-commerce desenvolvida com **Next.js 15**, **React 19**, **Tailwind CSS 4** e **React Query**. Ela permite visualizar produtos, pesquisar por nome, abrir um modal de detalhes e adicionar itens a um carrinho persistido localmente.
 
-First, run the development server:
+## 🚀 Tecnologias Utilizadas
 
-```bash
+- [Next.js 15](https://nextjs.org/) com Turbopack
+- [React 19](https://reactjs.org/)
+- [Tailwind CSS 4](https://tailwindcss.com/)
+- [React Query (TanStack)](https://tanstack.com/query/latest)
+- [Radix UI](https://www.radix-ui.com/)
+- [Lucide React Icons](https://lucide.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+
+## 📦 Estrutura de Pastas
+
+src/
+├── app/ # Rotas e páginas (Next.js App Router)
+│ └── cart/ # Página do carrinho de compras
+├── page.tsx # Página inicial
+├── components/ # Componentes reutilizáveis
+│ └── ui/ # Componentes de UI baseados em Radix e Tailwind
+├── contexts/ # Contexto global (ex: searchContext)
+├── lib/ # Funções utilitárias (ex: formatações)
+├── providers/ # Providers globais (React Query, Contexts)
+├── services/ # Funções de fetch/serviços externos (ex: getAllProducts)
+├── types/ # Tipagens TypeScript (ex: productType.ts)
+
+## 🧠 Funcionalidades
+
+- 🔎 **Pesquisa por título** com contexto global
+- 🛒 **Carrinho de compras** com:
+  - Adição de produtos
+  - Alteração de quantidade
+  - Confirmação de compra
+  - Persistência no `localStorage`
+  - Exclusão de produtos 'ao subtrair quantidade de 1'
+- 🧾 **Modal com detalhes do produto** ao clicar em um card
+- 🌐 Integração com serviço API https://fakestoreapi.com/
+- 🇧🇷 **Formatação de valores em reais**, com substituição de ponto por vírgula:
+
+```ts
+export const DotToComma = (value: number): string => {
+  return value.toFixed(2).replace(/\./g, ",");
+};
+💻 Como Rodar Localmente
+Clone o repositório
+
+bash
+Copiar
+Editar
+git clone https://github.com/douglasdodo1/dodo-shopping.git
+cd dodo-shopping
+Instale as dependências
+
+bash
+Copiar
+Editar
+npm install
+# ou
+yarn install
+Execute o projeto em modo de desenvolvimento
+
+bash
+Copiar
+Editar
 npm run dev
-# or
+# ou
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
+A aplicação estará disponível em http://localhost:3000
+
+📦 Scripts Disponíveis
+Comando	Descrição
+dev	Inicia o servidor Next.js com Turbopack
+build	Cria a versão de produção
+start	Inicia a aplicação em modo produção
+lint	Executa o ESLint para checagem de código
+
+✅ Futuras Melhorias
+Integração com backend real (API REST FULL)
+Pagamento com gateway (ex: Stripe)
+Responsividade total e animações
+Testes automatizados com Vitest ou Jest
+Filtros por categoria ou preço
+Autenticação de usuários
+
+## 🌐 Link para Acesso
+Deploy
+https://dodo-shopping.vercel.app/
+
+👤 Autor
+Douglas Gemir
+[CIN - UFPE • Ciência da Computação]
+GitHub: @douglasdodo1
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
